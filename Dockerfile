@@ -8,10 +8,8 @@
 FROM xinximo/java8-python3.6-linux
 
 MAINTAINER xinximo "woshiwangxin123@126.com"
-# 解决psycopg无法在python3.6-alpine中没有基础依赖环境问题,安装git
 COPY requirements.txt ./
-RUN apk add --no-cache postgresql-libs && \
-    apk add --no-cache --virtual .build-deps gcc musl-dev postgresql-dev && \
+RUN apk add --no-cache --virtual .build-deps gcc musl-dev && \
     apk add --no-cache bash git openssh && \
     python -m pip install --upgrade pip && \
     pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple && \
