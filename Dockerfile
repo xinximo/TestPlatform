@@ -9,7 +9,7 @@ FROM xinximo/java8-python3.6-linux
 
 MAINTAINER xinximo "woshiwangxin123@126.com"
 COPY requirements.txt ./
-RUN apk add --no-cache --virtual .build-deps gcc musl-dev gcc-c++ && \
+RUN apk add --no-cache --virtual .build-deps gcc musl-dev g++ && \
     apk add --no-cache bash git openssh && \
     python -m pip install --upgrade pip && \
     pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple && \
