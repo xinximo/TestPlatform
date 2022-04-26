@@ -13,7 +13,7 @@ from cors_utils import TabrResource
 
 username = "root"
 password = "123456"
-host = "localhost"
+host = "121.40.245.229"
 dbname = "testcase"
 options = "charset=utf8mb4"
 
@@ -85,12 +85,12 @@ class TestCaseDB(TabrResource):
             testcase = TestCase(name=name, file_name=file_name, content=content)
             db.session.add(testcase)
             db.session.commit()
-            return {"result": "ok", "errcode": "200"}
+            return {"result": "upd ok", "errcode": "200"}
         else:
             testcase = TestCase(**request.json)
             db.session.add(testcase)
             db.session.commit()
-            return {"result": "ok", "errcode": "200"}
+            return {"result": "add ok", "errcode": "200"}
 
         # 返回不同的状态码，和默认的错误页
         abort(404)
@@ -107,6 +107,13 @@ class TestCaseDB(TabrResource):
             testcase.file_name = request.json.get("file_name")
             db.session.commit()
             return {"errcode": 0, "content": "OK"}
+
+    def delete(self):
+        """
+        删除用例
+        :return:
+        """
+        # TODO
 
 
 
@@ -200,6 +207,6 @@ api.add_resource(TestCaseGet, '/get_testcase')
 api.add_resource(Login, '/login')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5001, debug=True)
     # db.drop_all()
     # db.create_all()
